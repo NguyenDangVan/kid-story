@@ -1,28 +1,23 @@
 "use client"
 import React, { useState } from 'react'
 import Image from 'next/image'
+import { OptionField } from './StoryType';
 
-export interface OptionField{
-    label:string,
-    imageUrl:string,
-    isFree:boolean,
-}
-
-function StoryType({userSelection}:any) {
+function AgeGroup({userSelection}:any) {
     const OptionList=[
         {
-            label:'Story Book',
-            imageUrl:'/story.png',
+            label:'0-2 Years',
+            imageUrl:'/02Years.png',
             isFree:true,
         },
         {
-            label:'Bed Story',
-            imageUrl:'/bedstory.png',
+            label:'3-5 Years',
+            imageUrl:'/35Years.png',
             isFree:true,
         },
         {
-            label:'Educational',
-            imageUrl:'/educational.png',
+            label:'5-8 Years',
+            imageUrl:'/58Years.png',
             isFree:true,
         }
     ]
@@ -33,12 +28,12 @@ function StoryType({userSelection}:any) {
         setSelectedOption(item.label);
         userSelection({
             fieldValue:item?.label,
-            fieldName:'storyType',
+            fieldName:'ageGroup',
         })
     }
   return (
     <div>
-        <label className='font-bold text-4xl text-primary'>2. Story Type</label>
+        <label className='font-bold text-4xl text-primary'>3. Age Group</label>
         <div className='grid grid-cols-3 gap-5 mt-3'>
             {OptionList.map((item,index)=>(
                 <div className={`relative grayscale hover:grayscale-0 cursor-pointer p-1
@@ -57,4 +52,4 @@ function StoryType({userSelection}:any) {
   )
 }
 
-export default StoryType
+export default AgeGroup

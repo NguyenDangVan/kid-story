@@ -1,16 +1,37 @@
 "use client"
-import React from 'react'
+import React, { useState } from 'react'
 import StorySubjectInput from './_components/StorySubjectInput'
 import StoryType from './_components/StoryType'
+import AgeGroup from './_components/AgeGroup'
+import ImageStyle from './_components/ImageStyle'
+import { Button } from '@heroui/react'
 
 
 export interface fieldData {
   fieldName:string,
   fieldValue:string
 }
+export interface formDataType{
+  storySubject:string,
+  storyType:string,
+  imageStyle:string,
+  ageGroup:string,
+}
 function CreateStory() {
+
+  const [formData,setFormData]=useState<formDataType>();
+
+
+  // used to add data to form
   const onHandleUserSelection=(data:fieldData)=>{
-    console.log(data);
+    console.log("fieldName =", data.fieldName);
+    console.log("fieldValue =", data.fieldValue);
+
+    setFormData((prev:any)=>({
+      ...prev,
+      [data.fieldName]:data.fieldValue
+    }));
+    console.log(formData)
   }
 
   return (
@@ -23,11 +44,19 @@ function CreateStory() {
         <StorySubjectInput userSelection={onHandleUserSelection}/>
 
         {/* Story Type */}
-        <StoryType />
+        <StoryType userSelection={onHandleUserSelection}/>
 
         {/* Age Group */}
+        <AgeGroup userSelection={onHandleUserSelection}/>
 
         {/* Image Style */}
+        <ImageStyle userSelection={onHandleUserSelection}/>
+      </div>
+
+      <div className='flex justify-end my-10'>
+        <Button color='primary' className='p-10 text-2xl'>
+          Generate Story
+        </Button>
       </div>
     </div>
   )

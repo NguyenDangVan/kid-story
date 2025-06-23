@@ -1,30 +1,30 @@
 "use client"
 import React, { useState } from 'react'
 import Image from 'next/image'
+import { OptionField } from './StoryType';
 
-export interface OptionField{
-    label:string,
-    imageUrl:string,
-    isFree:boolean,
-}
-
-function StoryType({userSelection}:any) {
+function ImageStyle({userSelection}:any) {
     const OptionList=[
         {
-            label:'Story Book',
-            imageUrl:'/story.png',
+            label:'3D Cartoon',
+            imageUrl:'/3D.png',
             isFree:true,
         },
         {
-            label:'Bed Story',
-            imageUrl:'/bedstory.png',
+            label:'Paper Cut',
+            imageUrl:'/paperCut.png',
             isFree:true,
         },
         {
-            label:'Educational',
-            imageUrl:'/educational.png',
+            label:'Water Color',
+            imageUrl:'/waterColor.png',
             isFree:true,
-        }
+        },
+        {
+            label:'Pixel Style',
+            imageUrl:'/pixel.png',
+            isFree:true,
+        },
     ]
 
     const [selectedOption, setSelectedOption]=useState<string>();
@@ -33,12 +33,12 @@ function StoryType({userSelection}:any) {
         setSelectedOption(item.label);
         userSelection({
             fieldValue:item?.label,
-            fieldName:'storyType',
+            fieldName:'imageStyle',
         })
     }
   return (
     <div>
-        <label className='font-bold text-4xl text-primary'>2. Story Type</label>
+        <label className='font-bold text-4xl text-primary'>4. Image Style</label>
         <div className='grid grid-cols-3 gap-5 mt-3'>
             {OptionList.map((item,index)=>(
                 <div className={`relative grayscale hover:grayscale-0 cursor-pointer p-1
@@ -48,7 +48,7 @@ function StoryType({userSelection}:any) {
                     <h2 className='absolute bottom-5 text-2xl text-white text-center w-full'>{item.label}</h2>
                     <Image src={item.imageUrl} alt={item.label}
                     width={300} height={500}
-                    className='object-cover h-[260px] rounded-3xl'
+                    className='object-cover h-[120px] rounded-3xl'
                     />
                 </div>
             ))}
@@ -57,4 +57,4 @@ function StoryType({userSelection}:any) {
   )
 }
 
-export default StoryType
+export default ImageStyle

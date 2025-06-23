@@ -6,7 +6,9 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "db:push": "drizzle-kit push",
+    "db:studio": "drizzle-kit studio"
   },
   "dependencies": {
     "@clerk/nextjs": "^6.22.0",
@@ -14,6 +16,9 @@
     "@heroui/input": "^2.4.22",
     "@heroui/navbar": "^2.2.20",
     "@heroui/react": "^2.8.0-beta.10",
+    "@neondatabase/serverless": "^1.0.1",
+    "dotenv": "^16.5.0",
+    "drizzle-orm": "^0.44.2",
     "framer-motion": "^12.18.1",
     "next": "15.3.4",
     "react": "^19.0.0",
@@ -24,8 +29,10 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "drizzle-kit": "^0.31.1",
     "postcss": "^8.5.6",
     "tailwindcss": "^4.1.10",
+    "tsx": "^4.20.3",
     "typescript": "^5"
   }
 }

@@ -4,15 +4,17 @@ import StorySubjectInput from './_components/StorySubjectInput'
 import StoryType from './_components/StoryType'
 import AgeGroup from './_components/AgeGroup'
 import ImageStyle from './_components/ImageStyle'
-import { Button, image, toast, useRouter } from '@heroui/react'
+import { Button, image } from '@heroui/react'
 import { getCreateStoryPrompt } from '@/config/prompt'
 import { geminiChat } from '@/config/GeminiAi'
 import { v4 as uuidv4 } from 'uuid';
 import { db } from '@/config/db'
 import { StoryData } from '@/config/schema'
 import { useUser } from "@clerk/nextjs"
+import { toast } from 'react-toastify'
 import CustomLoader from './_components/CustomLoader'
 import axios from 'axios'
+import { useRouter } from 'next/navigation';
 
 export interface fieldData {
   fieldName:string,
@@ -29,8 +31,8 @@ function CreateStory() {
   const [formData,setFormData]=useState<formDataType>();
   const [loading,setLoading]=useState(false);
   const router = useRouter();
-  // const notify = (msg:string) => toast(msg);
-  // const notifyError = (msg:string) => toast.error(msg);
+  const notify = (msg:string) => toast(msg);
+  const notifyError = (msg:string) => toast.error(msg);
   const {user}=useUser();
 
   // used to add data to form
@@ -72,19 +74,18 @@ function CreateStory() {
         imageBase64
       })
 
-      const storageImageUrl = imageRespSaveImage.data
+      const storageImageUrl = imageRespSaveImage.data.imageUrl
 
-      const resp = await SaveInDB(storyText, storageImageUrl);
-      console.log(resp);
+      const resp:any = await SaveInDB(storyText, storageImageUrl);
 
+      notify('Story generated');
+      router?.replace('/view-story/' + resp[0].storyId);
       setLoading(false);
     } catch (error) {
-      console.log(error)
+      console.log(error);
+      notifyError('Server Error, Try again');
       setLoading(false);
     }
-
-
-    // Generate image
   }
 
   const SaveInDB=async(output:string, imageUrl:string)=>{

@@ -31,11 +31,30 @@ function ViewStory({ params }: { params: Promise<{ id: string }> }) {
             {story?.output?.storyTitle}</h2>
         
         <HTMLFlipBook 
-            width={500} 
-            height={500} 
-            className="mt-10"
-            showCover={true} 
-        >
+              width={500}
+              height={500}
+              className="mt-10"
+              showCover={true}
+              style={{}}
+              startPage={0}
+              minWidth={500}
+              maxWidth={500}
+              minHeight={500}
+              maxHeight={500}
+              drawShadow={true}
+              flippingTime={0.5}
+              usePortrait={true}
+              startZIndex={0}
+              autoSize={false}
+              maxShadowOpacity={0}
+              mobileScrollSupport={false}
+              clickEventForward={false}
+              useMouseEvents={true}
+              swipeDistance={0}
+              showPageCorners={false}
+              disableFlipByClick={false}
+              size={'fixed'}
+            >
             <div>
                 <BookCoverPage imageUrl={story?.coverImage} />
             </div>
